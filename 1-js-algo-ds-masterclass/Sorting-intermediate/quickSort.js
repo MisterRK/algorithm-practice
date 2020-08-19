@@ -1,4 +1,17 @@
 
+function quickSort(arr, left = 0, right = arr.length - 1) {
+	if (left < right) {
+		let pivotIndex = pivot(arr, left, right);
+		//left
+		//sort the sub array to the left of the pivot
+		quickSort(arr, left, pivotIndex - 1);
+		//sort the subarray to the right of the pivot
+		//right
+		quickSort(arr, pivotIndex + 1, right);
+	}
+	return arr;
+}
+
 //helper function for swapping two elements in an array in place.
 function swap(arr, idx1, idx2) {
 	let temp = arr[idx1];
@@ -22,6 +35,7 @@ function pivot(arr, start = 0, end = arr.length + 1) {
 			console.log(arr);
 		}
 	}
+	//swap the start idx with the swapIdx => this puts the value in the right location for our array.
 	swap(arr, start, swapIdx);
 	console.log(arr);
 	return swapIdx;
