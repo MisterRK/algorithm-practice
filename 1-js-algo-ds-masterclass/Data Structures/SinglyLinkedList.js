@@ -62,7 +62,7 @@ class SinglyLinkedList {
 		return oldHead;
 	}
    
-   //add a node to the beginning of the SinglyLinkedList
+   //add a node to; the beginning of the SinglyLinkedList
    //return the SinglyLinkedList
 	unshift(val) {
 		let newNode = new node(val);
@@ -75,5 +75,20 @@ class SinglyLinkedList {
 		}
       this.length++;
       return this;
-	}
+   }
+   
+   //retrieves a node by its position in the SinglyLinkedList
+   //returns the node you are looking for 
+   get(index){
+      if(index < 0 || index >= this.length) return undefined
+      else {
+         let counter = 0;
+         let current = this.head
+         while(counter !== index){
+            current = current.next
+            counter++
+         }
+         return current
+      }
+   }
 }
