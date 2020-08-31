@@ -31,6 +31,7 @@ class SinglyLinkedList {
    }
    
    //remove a node from the end of the list
+   //return the item removed
    pop(){
       if(!this.head) return undefined
       let current = this.head
@@ -48,5 +49,20 @@ class SinglyLinkedList {
       }
       return current;
    }
+
+   //remove a node from the beginning of the linked list
+   // return the item removed
+   shift(){
+      if(!this.head) return undefined;
+      let oldHead = this.head
+      this.head = oldHead.next;
+      this.length--;
+      if(this.length === 0){
+         this.tail = null;
+      };
+      return oldHead;
+   }
+
+   
 
 }
