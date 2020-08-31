@@ -91,4 +91,31 @@ class SinglyLinkedList {
          return current
       }
    }
+
+   //sets a new value at specific index in the SLL
+   //returns true if the node was updated, and false if the request was invalid.
+   set(index, value){
+      let node = this.get(index);
+      if(node){
+         node.val = value;
+         return true
+      }
+      return false
+   }
+
+   insert(index, value){
+      
+      if(index < 0 || index > this.length) return false;
+      if(index === 0) return !!this.unshift(value)
+      if(index === this.length) return !!this.push(value)
+
+      let newNode = new Node(value)
+
+      let left = this.get(index-1);
+      let right = left.next;
+      left.next = newNode;
+      newNode.next = right;
+      this.length++;
+      return true;
+   }
 }
