@@ -131,5 +131,25 @@ class SinglyLinkedList {
 		this.length--;
 		return removedNode;
 	}
-	
+
+	//reverse a linked list IN PLACE!
+	reverse(){
+	let current = this.head
+	this.head = this.tail
+	this.tail = current
+	let prev = null;
+	let next;
+		for(let i = 0; i < this.length; i++){
+			next = current.next;
+			current.next = prev;
+			current = next;
+			prev = current;
+		}
+	}
+
 }
+// common BigO of Singly Linked Lists
+//insertion O(1)
+//removal best O(1) average 0(n) 
+//searching O(n)
+//accessing O(n)
