@@ -61,9 +61,9 @@ class SinglyLinkedList {
 		}
 		return oldHead;
 	}
-   
-   //add a node to; the beginning of the SinglyLinkedList
-   //return the SinglyLinkedList
+
+	//add a node to; the beginning of the SinglyLinkedList
+	//return the SinglyLinkedList
 	unshift(val) {
 		let newNode = new node(val);
 		if (!this.head) {
@@ -73,49 +73,63 @@ class SinglyLinkedList {
 			newNode.next = this.head;
 			this.head = newNode;
 		}
-      this.length++;
-      return this;
-   }
-   
-   //retrieves a node by its position in the SinglyLinkedList
-   //returns the node you are looking for 
-   get(index){
-      if(index < 0 || index >= this.length) return undefined
-      else {
-         let counter = 0;
-         let current = this.head
-         while(counter !== index){
-            current = current.next
-            counter++
-         }
-         return current
-      }
-   }
+		this.length++;
+		return this;
+	}
 
-   //sets a new value at specific index in the SLL
-   //returns true if the node was updated, and false if the request was invalid.
-   set(index, value){
-      let node = this.get(index);
-      if(node){
-         node.val = value;
-         return true
-      }
-      return false
-   }
+	//retrieves a node by its position in the SinglyLinkedList
+	//returns the node you are looking for
+	get(index) {
+		if (index < 0 || index >= this.length) return undefined;
+		else {
+			let counter = 0;
+			let current = this.head;
+			while (counter !== index) {
+				current = current.next;
+				counter++;
+			}
+			return current;
+		}
+	}
 
-   insert(index, value){
-      
-      if(index < 0 || index > this.length) return false;
-      if(index === 0) return !!this.unshift(value)
-      if(index === this.length) return !!this.push(value)
+	//sets a new value at specific index in the SLL
+	//returns true if the node was updated, and false if the request was invalid.
+	set(index, value) {
+		let node = this.get(index);
+		if (node) {
+			node.val = value;
+			return true;
+		}
+		return false;
+	}
 
-      let newNode = new Node(value)
+	insert(index, value) {
+		if (index < 0 || index > this.length) return false;
+		if (index === 0) return !!this.unshift(value);
+		if (index === this.length) return !!this.push(value);
 
-      let left = this.get(index-1);
-      let right = left.next;
-      left.next = newNode;
-      newNode.next = right;
-      this.length++;
-      return true;
-   }
+		let newNode = new Node(value);
+
+		let previousNode = this.get(index - 1);
+		let followingNode = previousNode.next;
+		previousNode.next = newNode;
+		newNode.next = followingNode;
+		this.length++;
+		return true;
+	}
+
+	//removes a nod from the index you pass in
+	//return the node that you removed
+	remove(index) {
+		if (index < 0 || index > this.length) return undefined;
+		if (index === 0) return this.shift();
+		if (index === this.length) return this.pop();
+
+		let previousNode = this.get(index - 1);
+		let removedNode = previousNode.next;
+		previousNode.next = removedNode.next;
+		this.length--;
+		return removedNode;
+	}
+	
 }
