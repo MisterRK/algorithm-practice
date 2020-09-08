@@ -62,7 +62,7 @@ class SinglyLinkedList {
 		return oldHead;
 	}
 
-	//add a node to; the beginning of the SinglyLinkedList
+	//add a node to the beginning of the SinglyLinkedList
 	//return the SinglyLinkedList
 	unshift(val) {
 		let newNode = new node(val);
