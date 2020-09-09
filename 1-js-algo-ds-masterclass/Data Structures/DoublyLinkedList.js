@@ -46,9 +46,9 @@ class DoublyLinkedList {
 
 	//remove the first value from the beginning of a Doubly Linked List
 	shift() {
-		if (this.length === 0 ) return undefined;
+		if (this.length === 0) return undefined;
 		let oldHead = this.head;
-		if(this.length === 1 ){
+		if (this.length === 1) {
 			this.head = null;
 			this.tail = null;
 		} else {
@@ -62,8 +62,8 @@ class DoublyLinkedList {
 
 	//adds a node to the beginning of a DoublyLinkedList
 	unshift(val) {
-		let newNode = new Node(val)
-		if ( this.length === 0 ){
+		let newNode = new Node(val);
+		if (this.length === 0) {
 			this.head = newNode;
 			this.tail = newNode;
 		} else {
@@ -72,6 +72,32 @@ class DoublyLinkedList {
 			this.head = newNode;
 		}
 		this.length++;
-		return this
+		return this;
+	}
+
+	//takes an index and gets the node at that postiion and returns it.
+	get(index) {
+		if (index >= this.length || index < 0) return undefined;
+		let count;
+		let current;
+
+		if (index <= this.length / 2) {
+			console.log("working from head");
+			count = 0;
+			current = this.head;
+			while (count !== index) {
+				current = current.next;
+				count++;
+			}
+		} else {
+			console.log("working from tail");
+			count = this.length - 1;
+			current = this.tail;
+			while (count !== index) {
+				current = current.prev;
+				count--;
+			}
+		}
+		return current;
 	}
 }
