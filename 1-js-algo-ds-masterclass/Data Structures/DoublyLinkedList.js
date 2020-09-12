@@ -100,4 +100,36 @@ class DoublyLinkedList {
 		}
 		return current;
 	}
+
+	//takes an index and a piece of data
+	//sets the item at the index given, and replaces the val with arguement given
+	set(index, val) {
+		let node = this.get(index);
+		if (node !== null) {
+			node.val = val;
+			return true;
+		}
+		return false;
+	}
+
+	//takes an index and a value
+	//creates a new node with that value and places it in the position you gave it
+	insert(index, val) {
+		if (index < 0 || index > this.length) return false;
+		if (index === 0) return !!this.unshift(val);
+		if (index === this.length) return !!this.push(val);
+
+		let newNode = new Node(val);
+		let prevNode = this.get(index - 1);
+		let afterNode = prevNode.next;
+
+		prevNode.next = newNode;
+		newNode.prev = prevNode;
+
+		newNode.next = afterNode;
+		afterNode.prev = newNode;
+		
+		this.length++;
+		return true;
+	}
 }
