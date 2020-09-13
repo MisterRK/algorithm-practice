@@ -21,10 +21,10 @@ class DoublyLinkedList {
 			this.tail = newNode;
 		} else {
 			this.tail.next = newNode;
-			newNode.previous = this.tail;
+			newNode.prev = this.tail;
 			this.tail = newNode;
-			this.length++;
 		}
+		this.length++;
 		return this;
 	}
 
@@ -128,8 +128,28 @@ class DoublyLinkedList {
 
 		newNode.next = afterNode;
 		afterNode.prev = newNode;
-		
+
 		this.length++;
 		return true;
+	}
+
+	//remove takes an index, and removes it from the list.
+	remove(index) {
+		if (index < 0 || index >= this.length) return undefined;
+		if (index === 0) return this.shift();
+		if ((index === this.length - 1)) return this.pop();
+		let foundNode = get(index);
+		let prevNode = foundNode.prev;
+		let nextNode = foundNode.next;
+
+		//re-assign the surrounding pointer to skip the foundNode
+		prevNode.next = nextNode;
+		nextNode.prev = prevNode;
+
+		//change the foundNode's pointers to null
+		foundNode.prev = null;
+		foundNode.next = null;
+
+		return foundNode;
 	}
 }
