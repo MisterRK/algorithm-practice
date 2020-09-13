@@ -137,7 +137,7 @@ class DoublyLinkedList {
 	remove(index) {
 		if (index < 0 || index >= this.length) return undefined;
 		if (index === 0) return this.shift();
-		if ((index === this.length - 1)) return this.pop();
+		if (index === this.length - 1) return this.pop();
 		let foundNode = get(index);
 		let prevNode = foundNode.prev;
 		let nextNode = foundNode.next;
@@ -152,4 +152,26 @@ class DoublyLinkedList {
 
 		return foundNode;
 	}
+
+	//reverse takes a doubly linked list and reverses it in place
+	reverse() {
+		let current = this.head;
+		this.head = this.tail;
+		this.tail = current;
+		let prev = null;
+		let next;
+
+		for (let i = 0; i < this.length; i++) {
+			prev = current.prev;
+			next = current.next;
+			current.next = prev;
+			current.prev = next;
+			current = next;
+		}
+		return this;
+	}
 }
+
+//use cases for a doubly linked list
+//browser history => every page you are looking at is going to have a next and a previous page.
+//searching is faster, but remember you are going to take up more memory
