@@ -39,6 +39,23 @@ class BinarySearchTree {
 			}
 		}
 	}
+
+	//check a binary tree for a certain value
+	find(value){
+		if(this.root === value) return false;
+		let current = this.root;
+		let found = false;
+		while(current && !found){
+			if(value<current.value){
+				current = current.left;
+			}else if (value > current.value){
+				current = current.right;
+			} else {
+				found = true}
+		}
+		if(!found) return false;
+		return !!current;
+	}
 }
 
 let tree = new BinarySearchTree();
