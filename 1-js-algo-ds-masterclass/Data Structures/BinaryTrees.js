@@ -87,19 +87,24 @@ class BinarySearchTree {
 		return visited; // [70, 25, 100, 20, 99, 125]
 	}
 
+	// push the value to the array first. 
+	// then look at all items to the left
+	// lastly look at all items to the right
 	DFSPreOrder() {
 		let visited = []; // store the nodes we visit
 
-		function DFSHelper(node) {
+		function preOrderHelper(node) {
 			visited.push(node.value);
-			if (node.left) DFSHelper(node.left); // check all the lefts recursively
-			if (node.right) DFSHelper(node.right); // check all the rights recursively
+			if (node.left) preOrderHelper(node.left); // check all the lefts recursively
+			if (node.right) preOrderHelper(node.right); // check all the rights recursively
 		}
-
-		DFSHelper(this.root); // start on the root node
+		preOrderHelper(this.root); // start on the root node
 		return visited;
 	}
 
+	// look at all items to the left
+	// then look at all items to the right
+	// lastly push the value to the array
 	DFSPostOrder() {
 		let visited = [];
 
@@ -112,6 +117,9 @@ class BinarySearchTree {
 		return visited;
 	}
 
+	// look at all the items to the left
+	// then push the value to the array
+	// lastly look at all the items to the right
 	DFSInOrder() {
 		let visited = [];
 		function inOrderHelper(node) {
