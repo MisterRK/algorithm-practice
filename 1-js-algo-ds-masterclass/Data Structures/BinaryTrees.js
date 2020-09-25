@@ -64,14 +64,11 @@ class BinarySearchTree {
 	}
 
 	// Breadth First search of a tree
-
-	// create a queue ( this can be an array) and a variable to store the values of nodes visited
-	// place the root node inot the queue
-	// Loop as long as there is anything in the queue
-	// Dequeue a node from the queue and push the value of the node into the variable that stores the nodes
-	// if there is a left property one the node dequeued - add it to the queue
-	// if there is a right property on the node dequeued - add it to the queue
-	// Return the variable that stores the values
+	// BFS checks a tree horizontally. It checks the entirety of one 'leve' before going any 'deeper'
+	// sample input tree
+	//      70
+	//   25    100
+	// 20     99  125
 
 	BFS() {
 		debugger;
@@ -83,10 +80,46 @@ class BinarySearchTree {
 
 		while (queue.length) {
 			current = queue.shift(); // we are looking at the first node in the queue ... FIFO
-			visited.push(current.value);
-			if (current.left) queue.push(current.left);
-			if (current.right) queue.push(current.right);
+			visited.push(current.value); // add the value of the node we are looking at to the visited array
+			if (current.left) queue.push(current.left); // if there is a left => add it to the queue
+			if (current.right) queue.push(current.right); // if there is a right => add it to the queue
 		}
+		return visited; // [70, 25, 100, 20, 99, 125]
+	}
+
+	DFSPreOrder() {
+		let visited = []; // store the nodes we visit
+
+		function DFSHelper(node) {
+			visited.push(node.value);
+			if (node.left) DFSHelper(node.left); // check all the lefts recursively
+			if (node.right) DFSHelper(node.right); // check all the rights recursively
+		}
+
+		DFSHelper(this.root); // start on the root node
+		return visited;
+	}
+
+	DFSPostOrder() {
+		let visited = [];
+
+		function postOrderHelper(node) {
+			if (node.left) postOrderHelper(node.left);
+			if (node.right) postOrderHelper(node.right);
+			visited.push(node.value);
+		}
+		postOrderHelper(this.root);
+		return visited;
+	}
+
+	DFSInOrder() {
+		let visited = [];
+		function inOrderHelper(node) {
+			if (node.left) inOrderHelper(node.left);
+			visited.push(node.value);
+			if (node.right) inOrderHelper(node.right);
+		}
+		inOrderHelper(this.root);
 		return visited;
 	}
 }
